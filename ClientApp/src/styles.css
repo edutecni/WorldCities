@@ -14,3 +14,13 @@ code {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+
+.home-cover {
+  display: block;
+  margin: auto;
+  max-width: 100%;
+}
+
+.logo{
+    width:15%;
+}

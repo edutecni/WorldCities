@@ -3,7 +3,8 @@
     class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"
   >
     <div class="container">
-      <a class="navbar-brand" [routerLink]="['/']">WorldCities</a>
+      <img src="img/logo.png" class="logo"/> 
+      <a class="navbar-brand" [routerLink]="['/']"><img src="img/logo3.png" /></a>
       <button
         class="navbar-toggler"
         type="button"
@@ -27,7 +28,7 @@
           >
             <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
           </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
+          <!--<li class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-dark" [routerLink]="['/counter']"
               >Counter</a
             >
@@ -36,7 +37,7 @@
             <a class="nav-link text-dark" [routerLink]="['/fetch-data']"
               >Fetch data</a
             >
-          </li>
+          </li>-->
         </ul>
       </div>
     </div>
