@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace WorldCities.Data.Models
 {
+    [Table("Countries")]
     public class Country
     {
         #region Constructor
@@ -27,6 +29,13 @@ namespace WorldCities.Data.Models
         public string ISO3 { get; set; }
 
         #endregion
+
+        #region Navigation Properties
+        
+        public virtual List<City> Cities { get; set; }
+        #endregion
+
+
 
     }
 }
