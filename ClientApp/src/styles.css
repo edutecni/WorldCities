@@ -15,12 +15,8 @@ code {
   border-color: #1861ac;
 }
 
-.home-cover {
-  display: block;
-  margin: auto;
-  max-width: 100%;
-}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-.logo{
-    width:15%;
-}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

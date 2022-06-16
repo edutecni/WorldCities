@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Text.Json;
 using WorldCities.Data;
 
 namespace WorldCities
@@ -24,20 +25,24 @@ namespace WorldCities
         {
             services.AddControllersWithViews()
                 .AddJsonOptions(options => {
-                    // Set this option to True to ident the Json output  
-                    options.JsonSerializerOptions.WriteIndented = true;
-                    // set his option to Null to use PascalCase instead of
-                    //  camelCase (default)
-                    //options.JsonSerializerOptions.PropertyNamingPolicy = null;
+                    // set this option to TRUE to indent the JSON output
+                    // options.JsonSerializerOptions.WriteIndented = true;
+                    // set this option to NULL to use PascalCase instead of CamelCase (default)
+                    // options.JsonSerializerOptions.PropertyNamingPolicy = null;
                 });
+
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            // Add ApplicationDbContext and SQL Server suport 
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            // Add ApplicationDbContext and SQL Server support
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")
+                    )
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,7 +60,15 @@ namespace WorldCities
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                OnPrepareResponse = (context) =>
+                {
+                    // Retrieve cache configuration from appsettings.json
+                    context.Context.Response.Headers["Cache-Control"] =
+                        Configuration["StaticFiles:Headers:Cache-Control"];
+                }
+            });
             if (!env.IsDevelopment())
             {
                 app.UseSpaStaticFiles();
