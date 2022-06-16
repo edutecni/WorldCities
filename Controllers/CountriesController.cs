@@ -25,7 +25,9 @@ namespace WorldCities.Controllers
         // GET: api/Countries/?pageIndex=0&pageSize=10
         // GET: api/Countries/?pageIndex=0&pageSize=10&sortColumn=name&sortOrder=asc
         // GET: api/Countries/?pageIndex=0&pageSize=10&sortColumn=name&sortOrder=asc&filterColumn=name&filterQuery=york
+        // GET: api/Countries/0/10
         [HttpGet]
+        [Route("{pageIndex?}/{pageSize?}")]
         public async Task<ActionResult<ApiResult<Country>>> GetCountries(
                 int pageIndex = 0,
                 int pageSize = 10,
